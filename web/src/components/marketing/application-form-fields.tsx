@@ -8,6 +8,7 @@ import { useState } from "react";
 const learningModes = ["Online live", "Online self-paced", "Hybrid"];
 type FieldsProps = {
   application: Application;
+  isAuthenticated: boolean;
   onChange: (field: keyof Application, value: string) => void;
   step: number;
 };
@@ -109,6 +110,7 @@ function SelectMenu({
 
 export function ApplicationFields({
   application,
+  isAuthenticated,
   onChange,
   step,
 }: FieldsProps) {
@@ -203,6 +205,23 @@ export function ApplicationFields({
             onChange={(event) => onChange("experience", event.target.value)}
             className="form-field min-h-12 resize-y py-3"
           />
+        </Field>
+      </div>
+    );
+  if (step === 3)
+    return isAuthenticated ? (
+      <div className="rounded-2xl border border-emerald-300/20 bg-emerald-300/[.06] px-5 py-5">
+        <p className="font-semibold text-white">Your account is connected</p>
+        <p className="mt-2 text-sm leading-6 text-white/65">You are signed in already, so this enrollment will be linked to your existing learner account.</p>
+      </div>
+    ) : (
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div className="sm:col-span-2"><p className="text-base leading-7 text-white/65">Create your access here. Enrollment is the only new-account path.</p></div>
+        <Field label="Create Password">
+          <input type="password" autoComplete="new-password" value={application.password} onChange={(event) => onChange("password", event.target.value)} className="form-field" />
+        </Field>
+        <Field label="Confirm Password">
+          <input type="password" autoComplete="new-password" value={application.confirmPassword} onChange={(event) => onChange("confirmPassword", event.target.value)} className="form-field" />
         </Field>
       </div>
     );

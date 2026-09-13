@@ -16,6 +16,10 @@
 - Added fictional generated editorial portraits to the mentor cards as replaceable visual placeholders.
 - Consolidated Student Success Stories into the full success panel and added a continuous review loop.
 - Replaced native enrollment selects with styled accessible custom menus to avoid browser-default dropdown rendering.
+- Replaced the public `Get Started` CTA with a single primary `Apply Now` action. The header now detects an authenticated learner and offers a contextual `Continue, <name>` action instead.
+- Added sign-in and account-creation entry points to the enrollment page for returning and new learners.
+- Consolidated new-account creation into the five-step enrollment flow. The standalone `/signup` route now redirects to `/apply`; returning learners retain only the sign-in path.
+- Added password setup as the Account step, account creation on submission, and an email verification connection panel in the completion state. Removed the celebration emoji from the submission heading.
 
 ## Verification
 

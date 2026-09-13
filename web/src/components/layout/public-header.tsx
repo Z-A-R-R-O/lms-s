@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight, UserRound } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useAuth } from "@/hooks/useAuth";
 
 const navLinks = [
   { label: "Programs", href: "/#programs" },
@@ -14,6 +15,7 @@ const navLinks = [
 ];
 
 export function PublicHeader() {
+  const { user, isLoading } = useAuth();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [portalProgress, setPortalProgress] = useState(0);
@@ -91,21 +93,8 @@ export function PublicHeader() {
           ))}
         </div>
 
-        <div className="hidden items-center gap-3 md:flex">
-          <Link
-            href="/apply"
-            className="rounded-xl px-4 py-2.5 text-sm font-medium text-white/75 transition-all hover:bg-white/5 hover:text-white"
-          >
-            Apply Now
-          </Link>
-          <Link
-            href="/signup"
-            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-xl border border-white/15 bg-gradient-to-r from-fuchsia-600 via-violet-600 to-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_28px_rgba(117,60,255,.28)] transition-all hover:scale-[1.02] active:scale-[0.98]"
-          >
-            <span className="absolute inset-x-0 top-0 h-px bg-white/50" />
-            <span className="relative z-10">Get Started</span>
-            <ArrowUpRight className="relative z-10 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </Link>
+        <div className="hidden items-center md:flex">
+          <AccountAction isLoading={isLoading} user={user} />
         </div>
 
         <div className="flex items-center gap-2 md:hidden">
@@ -139,24 +128,55 @@ export function PublicHeader() {
                 </Link>
               ))}
               <hr className="border-white/10" />
-              <Link
-                href="/apply"
+              <AccountAction
+                isLoading={isLoading}
+                user={user}
+                mobile
                 onClick={() => setMobileOpen(false)}
-                className="rounded-lg px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/5 hover:text-white"
-              >
-                Apply Now
-              </Link>
-              <Link
-                href="/signup"
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-fuchsia-600 to-indigo-600 px-4 py-2.5 text-sm font-medium text-white"
-              >
-                Get Started <ArrowUpRight className="h-4 w-4" />
-              </Link>
+              />
             </div>
           </motion.div>
         )}
       </AnimatePresence>
     </motion.header>
+  );
+}
+
+function AccountAction({
+  isLoading,
+  mobile = false,
+  onClick,
+  user,
+}: {
+  isLoading: boolean;
+  mobile?: boolean;
+  onClick?: () => void;
+  user: ReturnType<typeof useAuth>["user"];
+}) {
+  const className = mobile
+    ? "flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-fuchsia-600 to-indigo-600 px-4 py-2.5 text-sm font-semibold text-white"
+    : "group relative inline-flex items-center gap-3 overflow-hidden rounded-xl border border-white/15 bg-gradient-to-r from-fuchsia-600 via-violet-600 to-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_28px_rgba(117,60,255,.28)] transition-all hover:scale-[1.02] active:scale-[0.98]";
+
+  if (isLoading) {
+    return <span className="h-10 w-28 animate-pulse rounded-xl bg-white/10" aria-label="Loading account" />;
+  }
+
+  if (!user) {
+    return (
+      <Link href="/apply" onClick={onClick} className={className}>
+        {!mobile && <span className="absolute inset-x-0 top-0 h-px bg-white/50" />}
+        <span className="relative z-10">Apply Now</span>
+        <ArrowUpRight className="relative z-10 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+      </Link>
+    );
+  }
+
+  const firstName = user.fullName?.trim().split(" ")[0] || user.email?.split("@")[0] || "Learner";
+  return (
+    <Link href="/dashboard" onClick={onClick} className={className}>
+      <span className="grid h-5 w-5 place-items-center rounded-full bg-white/20"><UserRound className="h-3 w-3" /></span>
+      <span>Continue, {firstName}</span>
+      <ArrowUpRight className="h-3.5 w-3.5" />
+    </Link>
   );
 }
