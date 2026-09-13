@@ -1,210 +1,455 @@
 import type { MarketingProgram } from "@/types/program";
 
-export const marketingPrograms: MarketingProgram[] = [
+export const programCategories = [
+  "Popular Program",
+  "Skill Development Program",
+  "IBM Program",
+  "Competitive Exam",
+  "Professional Programs",
+];
+
+type ProgramDefinition = Pick<
+  MarketingProgram,
+  | "slug"
+  | "title"
+  | "category"
+  | "programGroups"
+  | "eyebrow"
+  | "description"
+  | "about"
+  | "duration"
+  | "deliveryMode"
+  | "accent"
+  | "coverImage"
+  | "coverAlt"
+  | "learningOutcomes"
+  | "tools"
+  | "idealFor"
+  | "careerOpportunities"
+>;
+
+const definitions: ProgramDefinition[] = [
   {
-    slug: "full-stack-development",
-    title: "Full Stack Development",
-    category: "Engineering",
-    eyebrow: "BUILD FOR THE WEB",
-    description: "Build, test, and deploy modern web products across the complete stack.",
-    about: "This project-led program takes you from web foundations to production deployment. You will build responsive interfaces, secure APIs, relational data models, and a portfolio-ready capstone while learning how professional teams plan, review, and ship software.",
+    slug: "full-stack-web-development",
+    title: "Full Stack Web Development",
+    category: "Technology",
+    programGroups: [
+      "Popular Program",
+      "Skill Development Program",
+      "IBM Program",
+    ],
+    eyebrow: "BUILD COMPLETE PRODUCTS",
+    description:
+      "Build complete web applications using front-end, back-end, databases, and APIs for seamless digital experiences.",
+    about:
+      "Learn the practical workflow behind modern web products. You will build interfaces, APIs, data models, and a capstone application that you can present with confidence.",
     duration: "6 months",
-    level: "Beginner to intermediate",
-    students: "22,131",
-    rating: "4.9",
-    price: "₹15,999",
-    modules: "8 modules",
-    projects: "6 projects",
+    deliveryMode: "Live online + labs",
     accent: "from-fuchsia-500 via-violet-600 to-indigo-700",
     coverImage: "/images/programs/full-stack-development.webp",
-    coverAlt: "Abstract full-stack system connecting interfaces, services, databases, and cloud infrastructure",
-    learningOutcomes: ["Responsive React interfaces", "Node.js APIs and authentication", "Relational database design", "Testing and deployment workflows", "A complete capstone product", "A recruiter-ready portfolio"],
-    curriculum: [
-      { title: "Web foundations", summary: "HTML, CSS, JavaScript, accessibility, and Git.", lessons: ["Semantic interfaces", "Responsive layout systems", "JavaScript fundamentals", "Git collaboration"] },
-      { title: "Modern front-end development", summary: "React, TypeScript, state, and data fetching.", lessons: ["Component architecture", "Type-safe application code", "Forms and validation", "API-driven interfaces"] },
-      { title: "Back-end systems", summary: "Node.js services, authentication, and API design.", lessons: ["REST API contracts", "Sessions and permissions", "Error handling", "Service testing"] },
-      { title: "Data and deployment", summary: "PostgreSQL, migrations, CI, and cloud delivery.", lessons: ["Relational modeling", "Query performance", "Automated checks", "Production deployment"] },
-      { title: "Capstone studio", summary: "Plan, build, review, and present a complete product.", lessons: ["Product brief", "Technical design", "Mentor review", "Portfolio presentation"] },
+    coverAlt:
+      "Abstract full-stack system connecting interfaces, services, databases, and cloud infrastructure",
+    learningOutcomes: [
+      "Responsive user interfaces",
+      "Server-side APIs",
+      "Database design",
+      "Authentication flows",
+      "Testing workflows",
+      "Deployment basics",
     ],
-    requirements: ["No prior coding knowledge required", "A laptop with at least 8 GB RAM", "Comfort using a web browser and files", "Eight to ten study hours each week"],
-    materials: ["40+ hours of guided lessons", "Downloadable starter repositories", "Weekly coding exercises", "Six assessed portfolio projects", "Interview and portfolio templates"],
-    tools: ["React", "TypeScript", "Node.js", "PostgreSQL", "GitHub", "VS Code"],
-    benefits: ["Lifetime lesson access", "Weekly mentor reviews", "Placement preparation", "Resume and portfolio review", "Mock technical interview", "Completion certificate"],
-    mentor: { name: "Arjun Menon", role: "Senior Full Stack Engineer", initials: "AM" },
-    faqs: buildFaqs("web development", "six months", "a deployed full-stack capstone"),
+    tools: [
+      "React",
+      "TypeScript",
+      "Node.js",
+      "PostgreSQL",
+      "GitHub",
+      "VS Code",
+    ],
+    idealFor: [
+      "Students starting a software career",
+      "Career switchers",
+      "Developers who want end-to-end skills",
+    ],
+    careerOpportunities: [
+      "Full Stack Developer",
+      "Front-End Developer",
+      "Back-End Developer",
+      "Web Application Developer",
+    ],
   },
   {
-    slug: "data-science-ai",
-    title: "Data Science & AI",
-    category: "Data Science",
-    eyebrow: "TURN DATA INTO DECISIONS",
-    description: "Analyze real datasets, build predictive models, and communicate useful insight.",
-    about: "Learn the practical workflow used by data teams: define a question, prepare messy data, explore patterns, build and evaluate models, and present recommendations clearly. Every module ends with evidence you can add to a professional portfolio.",
+    slug: "ai-and-ml",
+    title: "AI & ML",
+    category: "Technology",
+    programGroups: ["Popular Program", "IBM Program", "Professional Programs"],
+    eyebrow: "BUILD INTELLIGENT SYSTEMS",
+    description:
+      "Develop smart systems that learn, adapt, and make decisions using algorithms and data patterns.",
+    about:
+      "Build a foundation in machine learning through guided experiments, model evaluation, and hands-on applications that solve clear business and product problems.",
     duration: "6 months",
-    level: "Beginner to intermediate",
-    students: "18,420",
-    rating: "4.8",
-    price: "₹17,999",
-    modules: "8 modules",
-    projects: "7 projects",
+    deliveryMode: "Live online + labs",
+    accent: "from-indigo-500 via-blue-600 to-cyan-700",
+    coverImage: "/images/programs/generative-ai.webp",
+    coverAlt:
+      "A generative AI workflow transforming structured inputs into model outputs",
+    learningOutcomes: [
+      "Python for machine learning",
+      "Model training",
+      "Data preparation",
+      "Evaluation metrics",
+      "Responsible AI",
+      "Applied AI projects",
+    ],
+    tools: ["Python", "Jupyter", "scikit-learn", "Pandas", "Git", "Power BI"],
+    idealFor: [
+      "Students interested in AI",
+      "Analysts moving into machine learning",
+      "Engineers who want applied AI skills",
+    ],
+    careerOpportunities: [
+      "Machine Learning Engineer",
+      "AI Engineer",
+      "Data Scientist",
+      "AI Product Analyst",
+    ],
+  },
+  {
+    slug: "data-science",
+    title: "Data Science",
+    category: "Analytics",
+    programGroups: ["Popular Program", "IBM Program", "Professional Programs"],
+    eyebrow: "TURN DATA INTO INSIGHT",
+    description:
+      "Extract insights from complex data using statistical analysis, machine learning, and data visualization techniques.",
+    about:
+      "Work through the full data-science process from question framing and clean data to models, dashboards, and decision-ready storytelling.",
+    duration: "6 months",
+    deliveryMode: "Live online + labs",
     accent: "from-cyan-500 via-blue-600 to-indigo-800",
     coverImage: "/images/programs/data-science-ai.webp",
-    coverAlt: "Data flowing through an analytical model into charts, patterns, and predictions",
-    learningOutcomes: ["Python data analysis", "SQL for analytical work", "Statistical reasoning", "Machine-learning workflows", "Decision-ready dashboards", "An end-to-end AI capstone"],
-    curriculum: [
-      { title: "Python for data work", summary: "Write clear analysis code with Python and notebooks.", lessons: ["Python essentials", "NumPy foundations", "Pandas workflows", "Reproducible notebooks"] },
-      { title: "Statistics and exploration", summary: "Use evidence instead of intuition alone.", lessons: ["Descriptive statistics", "Experiment design", "Data visualization", "Insight narratives"] },
-      { title: "SQL and data preparation", summary: "Query, join, validate, and reshape datasets.", lessons: ["Analytical SQL", "Data cleaning", "Quality checks", "Feature preparation"] },
-      { title: "Machine learning", summary: "Train, compare, and explain predictive models.", lessons: ["Regression", "Classification", "Model evaluation", "Responsible AI"] },
-      { title: "Applied AI capstone", summary: "Solve a business problem from brief to presentation.", lessons: ["Problem framing", "Model pipeline", "Dashboard delivery", "Stakeholder presentation"] },
+    coverAlt:
+      "Data flowing through an analytical model into charts and predictions",
+    learningOutcomes: [
+      "Statistical analysis",
+      "SQL queries",
+      "Data cleaning",
+      "Predictive modeling",
+      "Data visualization",
+      "Insight storytelling",
     ],
-    requirements: ["No previous data-science experience", "Comfort with basic school mathematics", "A laptop with at least 8 GB RAM", "Eight to ten study hours each week"],
-    materials: ["Curated real-world datasets", "Guided notebook exercises", "Seven portfolio projects", "Model evaluation checklists", "Career interview practice"],
-    tools: ["Python", "Jupyter", "Pandas", "scikit-learn", "Power BI", "Git"],
-    benefits: ["Lifetime lesson access", "Dataset and notebook library", "Mentor project reviews", "Analytics interview practice", "Portfolio storytelling", "Completion certificate"],
-    mentor: { name: "Maya Joseph", role: "Lead Data Scientist", initials: "MJ" },
-    faqs: buildFaqs("data science", "six months", "a complete predictive analytics case study"),
+    tools: ["Python", "SQL", "Pandas", "scikit-learn", "Power BI", "Jupyter"],
+    idealFor: [
+      "Graduates who enjoy data",
+      "Analysts who want deeper modeling skills",
+      "Professionals who make data-driven decisions",
+    ],
+    careerOpportunities: [
+      "Data Scientist",
+      "Business Intelligence Analyst",
+      "Data Engineer",
+      "Research Analyst",
+    ],
   },
   {
-    slug: "ui-ux-design",
-    title: "UI/UX Design",
-    category: "Design",
-    eyebrow: "DESIGN WITH EVIDENCE",
-    description: "Research user needs and turn them into clear, testable digital experiences.",
-    about: "Move through the complete product-design process—from research and information architecture to visual systems, interactive prototypes, and usability testing. You will leave with thoughtful case studies that explain both the outcome and your decisions.",
+    slug: "data-analysis",
+    title: "Data Analysis",
+    category: "Analytics",
+    programGroups: ["Popular Program", "IBM Program", "Competitive Exam"],
+    eyebrow: "MAKE DATA USEFUL",
+    description:
+      "Analyze raw data to find trends, make decisions, and improve business outcomes effectively.",
+    about:
+      "Learn how analysts turn business questions into useful dashboards, reports, and recommendations through structured data work and clear communication.",
     duration: "4 months",
-    level: "Beginner friendly",
-    students: "12,860",
-    rating: "4.9",
-    price: "₹13,999",
-    modules: "7 modules",
-    projects: "5 projects",
-    accent: "from-emerald-400 via-teal-600 to-cyan-800",
-    coverImage: "/images/programs/ui-ux-design.webp",
-    coverAlt: "A product design workspace with wireframes, interface components, and user journeys",
-    learningOutcomes: ["User interviews and synthesis", "Information architecture", "Wireframes and user flows", "Accessible visual systems", "Interactive prototyping", "Two polished case studies"],
-    curriculum: [
-      { title: "Design foundations", summary: "Understand users, products, and useful constraints.", lessons: ["UX principles", "Research planning", "Interview practice", "Insight synthesis"] },
-      { title: "Structure and interaction", summary: "Turn needs into flows, screens, and prototypes.", lessons: ["Information architecture", "User journeys", "Wireframing", "Interaction patterns"] },
-      { title: "Visual systems", summary: "Create interfaces with clear hierarchy and consistency.", lessons: ["Typography", "Color and contrast", "Component systems", "Responsive design"] },
-      { title: "Testing and iteration", summary: "Evaluate prototypes and improve with evidence.", lessons: ["Usability studies", "Accessibility review", "Design critique", "Iteration planning"] },
-      { title: "Portfolio studio", summary: "Build case studies that communicate your process.", lessons: ["Case-study narrative", "Prototype polish", "Portfolio review", "Presentation practice"] },
+    deliveryMode: "Live online + labs",
+    accent: "from-sky-500 via-cyan-600 to-teal-800",
+    coverImage: "/images/programs/data-science-ai.webp",
+    coverAlt: "Analytical dashboards and patterns created from business data",
+    learningOutcomes: [
+      "Spreadsheet analysis",
+      "SQL fundamentals",
+      "Dashboard design",
+      "Trend analysis",
+      "Business reporting",
+      "Data quality checks",
     ],
-    requirements: ["No previous design experience", "A laptop capable of running Figma", "Curiosity about people and products", "Six to eight study hours each week"],
-    materials: ["Research templates", "Reusable Figma libraries", "Five guided product briefs", "Weekly critique sessions", "Portfolio presentation templates"],
-    tools: ["Figma", "FigJam", "Maze", "Notion", "Miro", "Adobe CC"],
-    benefits: ["Lifetime lesson access", "Weekly design critique", "Portfolio case-study review", "Design interview practice", "Mentor office hours", "Completion certificate"],
-    mentor: { name: "Ananya Rao", role: "Principal Product Designer", initials: "AR" },
-    faqs: buildFaqs("product design", "four months", "two complete product-design case studies"),
+    tools: ["Excel", "SQL", "Power BI", "Tableau", "Python", "Google Sheets"],
+    idealFor: [
+      "Beginners entering analytics",
+      "Business professionals",
+      "Students preparing for analyst roles",
+    ],
+    careerOpportunities: [
+      "Data Analyst",
+      "Business Analyst",
+      "Reporting Analyst",
+      "Operations Analyst",
+    ],
   },
   {
-    slug: "cloud-computing",
-    title: "Cloud Computing",
+    slug: "vlsi",
+    title: "VLSI",
     category: "Engineering",
-    eyebrow: "SHIP RELIABLE SYSTEMS",
-    description: "Deploy, automate, secure, and observe production cloud infrastructure.",
-    about: "Build a practical foundation in Linux, networking, cloud architecture, containers, delivery pipelines, and infrastructure as code. Hands-on labs show how modern teams move software from a repository to a reliable production environment.",
+    programGroups: [
+      "Popular Program",
+      "Skill Development Program",
+      "Competitive Exam",
+    ],
+    eyebrow: "DESIGN ELECTRONIC SYSTEMS",
+    description:
+      "Design and develop integrated circuits for electronics using advanced semiconductor technology and digital logic.",
+    about:
+      "Build practical knowledge of digital logic, semiconductor fundamentals, and the VLSI design flow through structured labs and engineering case studies.",
     duration: "5 months",
-    level: "Beginner to intermediate",
-    students: "9,740",
-    rating: "4.8",
-    price: "₹16,999",
-    modules: "8 modules",
-    projects: "6 labs",
+    deliveryMode: "Live online + simulation labs",
     accent: "from-orange-400 via-amber-600 to-rose-800",
     coverImage: "/images/programs/cloud-computing.webp",
-    coverAlt: "Connected modular cloud infrastructure with secure gateways and deployment paths",
-    learningOutcomes: ["Linux and networking basics", "AWS architecture decisions", "Containerized applications", "Automated CI/CD pipelines", "Infrastructure as code", "Monitoring and incident response"],
-    curriculum: [
-      { title: "Infrastructure foundations", summary: "Linux, networking, identity, and secure access.", lessons: ["Linux operations", "Network fundamentals", "Cloud identity", "Security baselines"] },
-      { title: "Cloud architecture", summary: "Design reliable compute, storage, and data services.", lessons: ["AWS core services", "Availability patterns", "Cost awareness", "Architecture reviews"] },
-      { title: "Containers and orchestration", summary: "Package and operate consistent workloads.", lessons: ["Docker images", "Container networking", "Kubernetes basics", "Release strategies"] },
-      { title: "Automation", summary: "Deliver changes safely with pipelines and infrastructure code.", lessons: ["GitHub Actions", "Terraform", "Secrets management", "Environment promotion"] },
-      { title: "Operations capstone", summary: "Deploy and observe a resilient application stack.", lessons: ["Monitoring", "Alerting", "Incident drills", "Reliability review"] },
+    coverAlt: "Connected digital systems and electronic engineering components",
+    learningOutcomes: [
+      "Digital logic",
+      "Verilog fundamentals",
+      "Semiconductor basics",
+      "Circuit simulation",
+      "VLSI design flow",
+      "Verification concepts",
     ],
-    requirements: ["Basic computer and web knowledge", "A laptop with at least 8 GB RAM", "Willingness to use a command line", "Eight study hours each week"],
-    materials: ["Cloud lab guides", "Reusable Terraform modules", "Pipeline templates", "Architecture review sheets", "Six assessed infrastructure labs"],
-    tools: ["AWS", "Docker", "Kubernetes", "Terraform", "GitHub Actions", "Linux"],
-    benefits: ["Lifetime lesson access", "Guided cloud labs", "Architecture mentor reviews", "DevOps interview practice", "Cloud portfolio project", "Completion certificate"],
-    mentor: { name: "Nisha Kumar", role: "Cloud Platform Architect", initials: "NK" },
-    faqs: buildFaqs("cloud engineering", "five months", "a production-style cloud deployment"),
+    tools: [
+      "Verilog",
+      "ModelSim",
+      "Xilinx",
+      "Cadence concepts",
+      "Linux",
+      "Git",
+    ],
+    idealFor: [
+      "Electronics students",
+      "Engineering graduates",
+      "Learners preparing for semiconductor roles",
+    ],
+    careerOpportunities: [
+      "VLSI Design Engineer",
+      "Verification Engineer",
+      "ASIC Engineer",
+      "Embedded Systems Engineer",
+    ],
   },
   {
-    slug: "product-management",
-    title: "Product Management",
-    category: "Business",
-    eyebrow: "LEAD FROM INSIGHT",
-    description: "Discover valuable problems, align teams, and guide products from idea to impact.",
-    about: "Practice the work of a product manager through realistic briefs. You will interview users, frame opportunities, prioritize tradeoffs, write clear requirements, define success metrics, and lead a cross-functional launch simulation.",
+    slug: "medical-coding",
+    title: "Medical Coding",
+    category: "Healthcare",
+    programGroups: [
+      "Popular Program",
+      "Skill Development Program",
+      "Competitive Exam",
+    ],
+    eyebrow: "CODE HEALTHCARE ACCURATELY",
+    description:
+      "Translate healthcare services into standardized codes for billing and health record management.",
+    about:
+      "Learn the coding standards, clinical documentation workflow, and accuracy checks used to support healthcare records and billing operations.",
     duration: "4 months",
-    level: "Beginner friendly",
-    students: "8,910",
-    rating: "4.8",
-    price: "₹14,999",
-    modules: "7 modules",
-    projects: "5 projects",
-    accent: "from-rose-400 via-pink-600 to-orange-700",
+    deliveryMode: "Live online + guided practice",
+    accent: "from-rose-400 via-pink-600 to-fuchsia-800",
     coverImage: "/images/programs/product-management.webp",
-    coverAlt: "A product strategy journey connecting customer signals, priorities, and a digital product",
-    learningOutcomes: ["Customer discovery", "Opportunity framing", "Roadmap prioritization", "Clear product requirements", "Metrics and experimentation", "Launch and stakeholder leadership"],
-    curriculum: [
-      { title: "Product thinking", summary: "Understand value, users, markets, and strategy.", lessons: ["Product principles", "Market context", "Business models", "Strategy choices"] },
-      { title: "Discovery", summary: "Find and validate problems worth solving.", lessons: ["User interviews", "Insight synthesis", "Opportunity mapping", "Assumption testing"] },
-      { title: "Definition and delivery", summary: "Create alignment without prescribing every detail.", lessons: ["Product briefs", "Requirements", "Prioritization", "Team rituals"] },
-      { title: "Metrics and growth", summary: "Measure outcomes and learn through experiments.", lessons: ["North-star metrics", "Funnels", "Experiment design", "Decision reviews"] },
-      { title: "Launch simulation", summary: "Lead a product from approved brief to market review.", lessons: ["Launch planning", "Stakeholder communication", "Risk management", "Outcome retrospective"] },
+    coverAlt: "Organized health records and digital clinical workflows",
+    learningOutcomes: [
+      "Medical terminology",
+      "ICD coding principles",
+      "Clinical documentation",
+      "Billing workflow",
+      "Compliance basics",
+      "Accuracy review",
     ],
-    requirements: ["No previous product role required", "Professional written communication", "Interest in customers and business", "Six to eight study hours each week"],
-    materials: ["Product brief templates", "Interview and research scripts", "Prioritization models", "Five realistic product cases", "PM interview question bank"],
-    tools: ["Notion", "Jira", "Figma", "Amplitude", "Miro", "Google Sheets"],
-    benefits: ["Lifetime lesson access", "Weekly product critique", "PM interview preparation", "Resume positioning", "Portfolio case review", "Completion certificate"],
-    mentor: { name: "Rahul Mehta", role: "Group Product Manager", initials: "RM" },
-    faqs: buildFaqs("product management", "four months", "a complete product launch case"),
+    tools: [
+      "ICD-10-CM",
+      "CPT concepts",
+      "EHR workflows",
+      "Medical dictionaries",
+      "Excel",
+      "Documentation templates",
+    ],
+    idealFor: [
+      "Healthcare graduates",
+      "Life-science students",
+      "Professionals entering medical administration",
+    ],
+    careerOpportunities: [
+      "Medical Coder",
+      "Clinical Coding Specialist",
+      "Medical Billing Specialist",
+      "Health Information Technician",
+    ],
   },
   {
-    slug: "generative-ai",
-    title: "Generative AI",
-    category: "AI / ML",
-    eyebrow: "BUILD USEFUL AI SYSTEMS",
-    description: "Create grounded AI applications with evaluation, retrieval, and responsible controls.",
-    about: "Go beyond prompt demos and learn the engineering workflow behind dependable generative-AI products. You will work with model APIs, retrieval, structured outputs, tool use, evaluation, safety, and deployment through focused application projects.",
-    duration: "3 months",
-    level: "Intermediate",
-    students: "11,560",
-    rating: "4.9",
-    price: "₹18,999",
-    modules: "7 modules",
-    projects: "5 projects",
-    accent: "from-violet-500 via-indigo-600 to-blue-800",
-    coverImage: "/images/programs/generative-ai.webp",
-    coverAlt: "A generative AI workflow transforming structured inputs into visual and audio outputs",
-    learningOutcomes: ["Effective model prompting", "Structured model outputs", "Retrieval-augmented generation", "Tool-using AI workflows", "Evaluation and guardrails", "A deployed AI application"],
-    curriculum: [
-      { title: "Model foundations", summary: "Understand capabilities, limits, tokens, and context.", lessons: ["LLM concepts", "Prompt structure", "Structured outputs", "Cost and latency"] },
-      { title: "Application patterns", summary: "Create reliable model-powered product flows.", lessons: ["API integration", "Conversation state", "Tool calling", "Error recovery"] },
-      { title: "Grounded generation", summary: "Connect models to trusted knowledge.", lessons: ["Embeddings", "Retrieval", "Chunking strategies", "Source attribution"] },
-      { title: "Evaluation and safety", summary: "Measure quality and design responsible controls.", lessons: ["Eval datasets", "Quality scoring", "Guardrails", "Human review"] },
-      { title: "AI product capstone", summary: "Build and present a production-minded AI application.", lessons: ["Architecture", "Observability", "Deployment", "Product demonstration"] },
+    slug: "hybrid-electric-vehicles",
+    title: "HEV — Hybrid Electric Vehicles",
+    category: "Automotive",
+    programGroups: [
+      "Popular Program",
+      "Skill Development Program",
+      "Professional Programs",
     ],
-    requirements: ["Comfort with basic Python or JavaScript", "Familiarity with APIs", "A laptop with at least 8 GB RAM", "Eight to ten study hours each week"],
-    materials: ["Five application starter kits", "Evaluation templates", "Retrieval datasets", "Architecture examples", "AI engineering interview practice"],
-    tools: ["Python", "OpenAI API", "LangChain", "PostgreSQL", "Vector search", "GitHub"],
-    benefits: ["Lifetime lesson access", "AI starter repositories", "Weekly engineering reviews", "Evaluation toolkit", "Capstone architecture review", "Completion certificate"],
-    mentor: { name: "Kavya Iyer", role: "Applied AI Engineer", initials: "KI" },
-    faqs: buildFaqs("generative AI", "three months", "a deployed, evaluated AI application"),
+    eyebrow: "ENGINEER THE FUTURE OF MOBILITY",
+    description:
+      "Learn hybrid vehicle design, battery systems, and motor control for future-focused automotive engineering.",
+    about:
+      "Explore the systems that power hybrid vehicles, from energy storage and motor control to diagnostics, safety, and sustainable mobility design.",
+    duration: "5 months",
+    deliveryMode: "Live online + engineering labs",
+    accent: "from-emerald-400 via-teal-600 to-cyan-800",
+    coverImage: "/images/programs/cloud-computing.webp",
+    coverAlt:
+      "Connected technology representing future-focused automotive engineering",
+    learningOutcomes: [
+      "HEV architecture",
+      "Battery management",
+      "Motor control",
+      "Power electronics",
+      "Vehicle diagnostics",
+      "Safety systems",
+    ],
+    tools: [
+      "MATLAB concepts",
+      "Simulink concepts",
+      "CAN tools",
+      "Battery analysis",
+      "Diagnostic tools",
+      "Engineering drawings",
+    ],
+    idealFor: [
+      "Automotive students",
+      "Mechanical and electrical engineers",
+      "Learners interested in EV technology",
+    ],
+    careerOpportunities: [
+      "EV Systems Engineer",
+      "Battery Engineer",
+      "Automotive Technician",
+      "Powertrain Engineer",
+    ],
+  },
+  {
+    slug: "biotech-medical-program",
+    title: "Bio-Tech & Medical Program",
+    category: "Life Sciences",
+    programGroups: ["Popular Program", "Professional Programs"],
+    eyebrow: "CONNECT SCIENCE AND HEALTHCARE",
+    description:
+      "Covers biotechnology techniques, medical equipment handling, and healthcare technology fundamentals for life sciences careers.",
+    about:
+      "Develop foundational laboratory, medical-technology, and healthcare-process knowledge with guided practice focused on safe, accurate professional work.",
+    duration: "5 months",
+    deliveryMode: "Live online + practical labs",
+    accent: "from-violet-500 via-fuchsia-600 to-rose-700",
+    coverImage: "/images/programs/ui-ux-design.webp",
+    coverAlt: "Structured scientific tools and biomedical technology concepts",
+    learningOutcomes: [
+      "Biotechnology methods",
+      "Lab safety",
+      "Medical equipment basics",
+      "Healthcare technology",
+      "Quality procedures",
+      "Scientific documentation",
+    ],
+    tools: [
+      "Lab protocols",
+      "Medical equipment guides",
+      "Documentation templates",
+      "Microscopy concepts",
+      "Quality checklists",
+      "Data tools",
+    ],
+    idealFor: [
+      "Life-science students",
+      "Healthcare graduates",
+      "Learners entering biotechnology roles",
+    ],
+    careerOpportunities: [
+      "Laboratory Technician",
+      "Biomedical Technician",
+      "Clinical Research Assistant",
+      "Healthcare Technology Specialist",
+    ],
   },
 ];
 
-export function getMarketingProgram(slug: string): MarketingProgram | undefined {
+export const marketingPrograms: MarketingProgram[] =
+  definitions.map(createProgram);
+
+export function getMarketingProgram(
+  slug: string,
+): MarketingProgram | undefined {
   return marketingPrograms.find((program) => program.slug === slug);
 }
 
-function buildFaqs(subject: string, duration: string, outcome: string) {
+function createProgram(definition: ProgramDefinition): MarketingProgram {
+  const curriculum = [
+    "Foundations",
+    "Core skills",
+    "Applied practice",
+    "Professional workflow",
+    "Capstone project",
+  ].map((title, index) => ({
+    title: `Module ${String(index + 1).padStart(2, "0")} — ${title}`,
+    summary: `Build practical ${definition.title.toLowerCase()} knowledge through guided lessons and review.`,
+    lessons: [
+      `${title} concepts`,
+      "Guided exercises",
+      "Real-world case study",
+      "Knowledge check",
+    ],
+  }));
+  return {
+    ...definition,
+    level: "Beginner & Intermediate",
+    students: "12,000+",
+    rating: "4.9",
+    price: "₹15,999",
+    modules: "5 modules",
+    projects: "4 projects",
+    curriculum,
+    requirements: [
+      "No specialist experience is required",
+      "A laptop and reliable internet connection",
+      "Curiosity and consistent study time",
+    ],
+    materials: [
+      "Guided lessons and practice",
+      "Project briefs",
+      "Mentor feedback",
+      "Career preparation resources",
+    ],
+    benefits: [
+      "Practical projects",
+      "Program certificate",
+      "Mentor guidance",
+      "Career preparation",
+    ],
+    mentor: {
+      name: "ABHI Learning Team",
+      role: "Industry instructors",
+      initials: "AL",
+    },
+    faqs: buildFaqs(definition.title, definition.duration),
+  };
+}
+
+function buildFaqs(subject: string, duration: string) {
   return [
-    { question: `Do I need prior ${subject} experience?`, answer: "No specialist experience is required unless noted in the requirements. The opening module establishes the shared foundation used throughout the program." },
-    { question: "How is the program delivered?", answer: "You learn through concise lessons, guided practice, live mentor reviews, and projects that mirror real professional work." },
-    { question: "How long do I retain access?", answer: `The guided cohort runs for ${duration}, and enrolled learners keep lifetime access to the recorded lessons and core project resources.` },
-    { question: "Will I build portfolio work?", answer: `Yes. The program is designed around practical evidence, ending with ${outcome}.` },
-    { question: "Is career support included?", answer: "Yes. Career support includes resume positioning, portfolio feedback, interview practice, and guidance on presenting your work." },
+    {
+      question: `Do I need prior ${subject} experience?`,
+      answer:
+        "No specialist experience is required. The first module builds the foundation needed for the remaining work.",
+    },
+    {
+      question: "How is the program delivered?",
+      answer:
+        "You learn through concise lessons, guided practice, mentor review, and practical projects.",
+    },
+    {
+      question: "How long do I retain access?",
+      answer: `The guided program runs for ${duration}, and you keep access to the core learning resources.`,
+    },
   ];
 }

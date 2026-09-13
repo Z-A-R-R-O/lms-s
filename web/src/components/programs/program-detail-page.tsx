@@ -33,6 +33,7 @@ export function ProgramDetailPage({ program, relatedPrograms }: ProgramDetailPag
   const [compactReading, setCompactReading] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
   const [tweakOpen, setTweakOpen] = useState(false);
+  const [certificateOpen, setCertificateOpen] = useState(false);
 
   async function shareProgram() {
     const url = window.location.href;
@@ -64,12 +65,14 @@ export function ProgramDetailPage({ program, relatedPrograms }: ProgramDetailPag
               <span className="flex items-center gap-2"><UsersRound className="h-4 w-4 text-violet-300" />{program.students} learners</span>
               <span className="rounded-full border border-white/15 px-3 py-1.5">{program.category}</span>
             </div>
-            <div className="mt-10 grid max-w-3xl grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/12 bg-white/10 sm:grid-cols-4">
+            <div className="mt-10 grid max-w-3xl grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/12 bg-white/10 sm:grid-cols-5">
               <Metric icon={Clock3} label="Duration" value={program.duration} />
               <Metric icon={Gauge} label="Level" value={program.level} />
               <Metric icon={Layers3} label="Curriculum" value={program.modules} />
               <Metric icon={Sparkles} label="Practice" value={program.projects} />
+              <Metric icon={UsersRound} label="Mode" value={program.deliveryMode} />
             </div>
+            <Link href={`/apply?program=${program.slug}`} className="mt-8 inline-flex items-center gap-3 rounded-xl bg-white px-6 py-4 text-sm font-semibold text-black transition hover:bg-white/85">Apply Now <ArrowRight className="h-4 w-4" /></Link>
           </div>
         </div>
       </section>
@@ -117,9 +120,25 @@ export function ProgramDetailPage({ program, relatedPrograms }: ProgramDetailPag
             <Checklist title="Material includes" items={program.materials} />
           </section>
 
+          <section className="program-section grid gap-12 border-b border-white/10 md:grid-cols-2">
+            <Checklist title="Who is this course for?" items={program.idealFor} />
+            <Checklist title="Career opportunities" items={program.careerOpportunities} />
+          </section>
+
           <section className="program-section border-b border-white/10">
             <SectionHeading eyebrow="WORKBENCH" title="Tools you will use" />
             <div className="mt-7 flex flex-wrap gap-3">{program.tools.map((tool) => <span key={tool} className="rounded-full border border-white/12 bg-white/[.035] px-4 py-2.5 text-sm text-white/75">{tool}</span>)}</div>
+          </section>
+
+          <section className="program-section border-b border-white/10">
+            <SectionHeading eyebrow="RECOGNITION" title="Earn Your Certificate" />
+            <div className="mt-8 grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_280px]">
+              <button type="button" onClick={() => setCertificateOpen(true)} className="group relative overflow-hidden rounded-2xl border border-white/15 text-left shadow-[0_24px_70px_rgba(0,0,0,.3)]">
+                <Image src="/images/certificates/course-certificate-sample.png" alt="Sample ABHI course certificate awarded to ARUNEZ" width={1672} height={940} className="h-auto w-full transition duration-500 group-hover:scale-[1.02]" />
+                <span className="absolute inset-x-0 bottom-0 bg-black/70 px-5 py-3 text-sm font-semibold text-white opacity-0 transition group-hover:opacity-100">View Certificate</span>
+              </button>
+              <div><p className="text-lg leading-8 text-white/70">Successfully complete the program and receive your course certificate.</p><button type="button" onClick={() => setCertificateOpen(true)} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white transition hover:text-fuchsia-200">View Certificate <ArrowRight className="h-4 w-4" /></button></div>
+            </div>
           </section>
 
           <section className="program-section">
@@ -137,7 +156,7 @@ export function ProgramDetailPage({ program, relatedPrograms }: ProgramDetailPag
             </div>
             <div className="p-6">
               <div className="flex items-end justify-between gap-4"><p className="text-3xl font-semibold tracking-tight">{program.price}</p><p className="pb-1 text-[13px] text-white/52">Flexible payment available</p></div>
-              <Link href={`/signup?program=${program.slug}`} className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-white px-5 py-3.5 text-sm font-semibold text-black transition hover:bg-white/85">Enroll in this program <ArrowRight className="h-4 w-4" /></Link>
+              <Link href={`/apply?program=${program.slug}`} className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-white px-5 py-3.5 text-sm font-semibold text-black transition hover:bg-white/85">Apply Now <ArrowRight className="h-4 w-4" /></Link>
               <div className="mt-7 flex items-center gap-3 border-t border-white/10 pt-6"><span className="grid h-11 w-11 place-items-center rounded-full bg-violet-500/18 text-sm font-semibold text-violet-200">{program.mentor.initials}</span><div><p className="font-semibold">{program.mentor.name}</p><p className="text-[13px] text-white/52">{program.mentor.role}</p></div></div>
               <p className="mt-7 text-[13px] font-semibold tracking-[.14em] text-white/45">INCLUDED</p>
               <div className="mt-4 grid gap-3">{program.benefits.map((benefit) => <CheckRow key={benefit}>{benefit}</CheckRow>)}</div>
@@ -150,6 +169,10 @@ export function ProgramDetailPage({ program, relatedPrograms }: ProgramDetailPag
       <section className="border-t border-white/10 px-4 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div className="mx-auto max-w-[1360px]"><SectionHeading eyebrow="KEEP EXPLORING" title="Related programs" /><div className="mt-8 grid gap-4 md:grid-cols-3">{relatedPrograms.map((related) => <Link key={related.slug} href={`/programs/${related.slug}`} className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[.025] transition hover:border-white/25 hover:bg-white/[.05]"><div className="relative aspect-[16/8] overflow-hidden"><Image src={related.coverImage} alt={related.coverAlt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover transition duration-700 group-hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-[#090a12] to-transparent" /></div><div className="p-6"><p className="text-[13px] font-semibold text-fuchsia-300">{related.category}</p><h3 className="mt-4 text-2xl font-semibold">{related.title}</h3><p className="mt-3 leading-6 text-white/58">{related.description}</p><span className="mt-7 inline-flex items-center gap-2 text-sm font-semibold">View program <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span></div></Link>)}</div></div>
       </section>
+
+      <section className="border-t border-white/10 px-4 py-20 text-center sm:px-8 lg:px-12 lg:py-28"><p className="text-xs font-semibold tracking-[.2em] text-fuchsia-300">YOUR NEXT STEP</p><h2 className="mt-4 font-serif text-4xl tracking-tight sm:text-6xl">Ready to Start Your Learning Journey?</h2><Link href={`/apply?program=${program.slug}`} className="mt-8 inline-flex items-center gap-3 rounded-xl bg-white px-6 py-4 text-sm font-semibold text-black transition hover:bg-white/85">Apply Now <ArrowRight className="h-4 w-4" /></Link></section>
+
+      {certificateOpen && <div role="dialog" aria-modal="true" aria-label="Course certificate preview" className="fixed inset-0 z-[90] grid place-items-center bg-black/85 p-4 backdrop-blur-sm"><button type="button" aria-label="Close certificate preview" onClick={() => setCertificateOpen(false)} className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-black/40 text-white"><X className="h-5 w-5" /></button><div className="max-h-[90vh] max-w-6xl overflow-auto rounded-xl"><Image src="/images/certificates/course-certificate-sample.png" alt="Sample ABHI course certificate awarded to ARUNEZ" width={1672} height={940} className="h-auto w-full" priority /></div></div>}
 
       <aside className={`fixed bottom-4 right-20 z-[70] rounded-2xl border border-white/15 bg-[#0b0b16]/95 shadow-2xl backdrop-blur-xl transition-all print:hidden ${tweakOpen ? "w-[min(18rem,calc(100vw-6rem))] p-3" : "w-12 p-1"}`} aria-label="Program page appearance controls">
         {tweakOpen ? <><div className="flex items-center justify-between gap-3 px-1"><span className="flex items-center gap-2 text-sm font-semibold"><Settings2 className="h-4 w-4 text-fuchsia-300" />Reading spacing</span><button type="button" onClick={() => setTweakOpen(false)} aria-label="Close appearance controls" className="grid h-7 w-7 place-items-center rounded-lg text-white/55 transition hover:bg-white/10 hover:text-white"><X className="h-4 w-4" /></button></div><div className="mt-3 grid grid-cols-2 rounded-xl bg-white/[.06] p-1 text-sm">{[{ label: "Relaxed", compact: false }, { label: "Compact", compact: true }].map((option) => <button key={option.label} type="button" aria-pressed={compactReading === option.compact} onClick={() => setCompactReading(option.compact)} className={`rounded-lg px-3 py-2 font-medium transition ${compactReading === option.compact ? "bg-white text-black" : "text-white/60 hover:text-white"}`}>{option.label}</button>)}</div></> : <button type="button" onClick={() => setTweakOpen(true)} aria-label="Open appearance controls" className="grid h-10 w-10 place-items-center rounded-xl text-fuchsia-200 transition hover:bg-white/10"><Settings2 className="h-4 w-4" /></button>}

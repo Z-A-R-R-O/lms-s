@@ -9,7 +9,7 @@ const navLinks = [
   { label: "Programs", href: "/#programs" },
   { label: "Learning Path", href: "/#pathway" },
   { label: "Mentors", href: "/#mentors" },
-  { label: "Pricing", href: "/#pricing" },
+  { label: "Study Spot", href: "/#study-spot" },
   { label: "About", href: "/#about" },
 ];
 
@@ -93,10 +93,10 @@ export function PublicHeader() {
 
         <div className="hidden items-center gap-3 md:flex">
           <Link
-            href="/login"
+            href="/apply"
             className="rounded-xl px-4 py-2.5 text-sm font-medium text-white/75 transition-all hover:bg-white/5 hover:text-white"
           >
-            Sign in
+            Apply Now
           </Link>
           <Link
             href="/signup"
@@ -140,11 +140,11 @@ export function PublicHeader() {
               ))}
               <hr className="border-white/10" />
               <Link
-                href="/login"
+                href="/apply"
                 onClick={() => setMobileOpen(false)}
                 className="rounded-lg px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/5 hover:text-white"
               >
-                Sign in
+                Apply Now
               </Link>
               <Link
                 href="/signup"

@@ -19,10 +19,12 @@ export interface MarketingProgram {
   slug: string;
   title: string;
   category: string;
+  programGroups: string[];
   eyebrow: string;
   description: string;
   about: string;
   duration: string;
+  deliveryMode: string;
   level: string;
   students: string;
   rating: string;
@@ -38,6 +40,8 @@ export interface MarketingProgram {
   materials: string[];
   tools: string[];
   benefits: string[];
+  idealFor: string[];
+  careerOpportunities: string[];
   mentor: ProgramMentor;
   faqs: ProgramFaq[];
 }
