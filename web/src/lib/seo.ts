@@ -8,9 +8,11 @@ export interface GlobalSeoSettings {
 }
 
 export async function getGlobalSeoSettings(): Promise<GlobalSeoSettings> {
-  const settings = await prisma.platformSetting.findMany({
-    where: { group: "seo" },
-  }).catch(() => []);
+  const settings = await prisma.platformSetting
+    .findMany({
+      where: { group: "seo" },
+    })
+    .catch(() => []);
 
   const map: Record<string, string> = {};
   for (const s of settings) {
@@ -18,8 +20,9 @@ export async function getGlobalSeoSettings(): Promise<GlobalSeoSettings> {
   }
 
   return {
-    siteTitle: map["site_title"] ?? "NEOT",
-    metaDescription: map["meta_description"] ?? "Learning that adapts to humans.",
+    siteTitle: map["site_title"] ?? "skilloopz",
+    metaDescription:
+      map["meta_description"] ?? "Learning that adapts to humans.",
     ogImage: map["og_image"] ?? "/og-image.png",
   };
 }
@@ -31,9 +34,10 @@ export function buildPageMetadata(
 ): Metadata {
   const title = (seo?.metaTitle as string) || defaults.title;
   const description =
-    (seo?.metaDescription as string) || defaults.description || global.metaDescription;
-  const ogImage =
-    (seo?.ogImage as string) || defaults.image || global.ogImage;
+    (seo?.metaDescription as string) ||
+    defaults.description ||
+    global.metaDescription;
+  const ogImage = (seo?.ogImage as string) || defaults.image || global.ogImage;
   const canonicalUrl = seo?.canonicalUrl as string | undefined;
   const noindex = seo?.robotsNoindex === true;
   const nofollow = seo?.robotsNofollow === true;

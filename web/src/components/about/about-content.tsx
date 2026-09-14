@@ -75,7 +75,7 @@ export function AboutContent() {
             className="inline-flex items-center gap-2 rounded-full border border-primary-500/20 bg-primary-500/10 px-4 py-1.5 text-[11px] font-bold tracking-[0.2em] uppercase text-primary-400"
           >
             <Sparkles className="h-3.5 w-3.5" />
-            About NEOT
+            About skilloopz
           </motion.div>
 
           <motion.h1
@@ -94,7 +94,7 @@ export function AboutContent() {
             transition={{ duration: 1, delay: 0.4, ease: easing }}
             className="max-w-2xl text-lg leading-relaxed text-muted-foreground/90 sm:text-xl"
           >
-            We believe education should mold to each learner — not the other way around. NEOT is built from the ground up to make adaptive, personalized learning accessible to everyone.
+            We believe education should mold to each learner — not the other way around. skilloopz is built from the ground up to make adaptive, personalized learning accessible to everyone.
           </motion.p>
         </div>
 
@@ -122,7 +122,7 @@ export function AboutContent() {
               </h2>
               <div className="mt-8 space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  NEOT was founded on a simple idea: every learner is unique, so every learning experience should be too. Traditional education forces everyone through the same path — we believe technology can do better.
+                  skilloopz was founded on a simple idea: every learner is unique, so every learning experience should be too. Traditional education forces everyone through the same path — we believe technology can do better.
                 </p>
                 <p>
                   Our platform combines cutting-edge AI with deep pedagogical research to create learning experiences that adapt in real-time. From lesson pacing to content difficulty, every aspect adjusts to each learner.
@@ -151,7 +151,7 @@ export function AboutContent() {
                 <blockquote className="text-lg leading-relaxed text-foreground/90">
                   &ldquo;Humans should not adapt to systems. Systems should adapt to humans.&rdquo;
                 </blockquote>
-                <p className="mt-6 text-sm text-muted-foreground">— The NEOT Philosophy</p>
+                <p className="mt-6 text-sm text-muted-foreground">— The skilloopz philosophy</p>
               </div>
               <div className="absolute -bottom-4 -right-4 -z-10 h-48 w-48 rounded-full bg-primary-500/10 blur-[80px]" />
               <div className="absolute -top-4 -left-4 -z-10 h-48 w-48 rounded-full bg-accent-500/10 blur-[80px]" />

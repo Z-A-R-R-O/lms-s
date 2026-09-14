@@ -13,7 +13,7 @@ export default function LoginPage() {
   return (
     <AuthSplitLayout
       title="Welcome back"
-      subtitle="Sign in to your NEOT account"
+      subtitle="Sign in to your skilloopz account"
     >
       <Suspense fallback={null}>
         <VerifiedBanner />

@@ -12,11 +12,16 @@ export function generateStaticParams() {
   return marketingPrograms.map((program) => ({ slug: program.slug }));
 }
 
-export async function generateMetadata({ params }: ProgramPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: ProgramPageProps): Promise<Metadata> {
   const { slug } = await params;
   const program = getMarketingProgram(slug);
   if (!program) return {};
-  return { title: `${program.title} | ABHI LMS`, description: program.description };
+  return {
+    title: `${program.title} | skilloopz`,
+    description: program.description,
+  };
 }
 
 export default async function ProgramPage({ params }: ProgramPageProps) {
@@ -26,7 +31,11 @@ export default async function ProgramPage({ params }: ProgramPageProps) {
 
   const relatedPrograms = marketingPrograms
     .filter((candidate) => candidate.slug !== program.slug)
-    .sort((left, right) => Number(right.category === program.category) - Number(left.category === program.category))
+    .sort(
+      (left, right) =>
+        Number(right.category === program.category) -
+        Number(left.category === program.category),
+    )
     .slice(0, 3);
 
   return (

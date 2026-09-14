@@ -21,8 +21,9 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "ABHI LMS | Learn. Practice. Get Placed.",
-  description: "Expert-led programs that prepare learners for high-growth careers.",
+  title: "skilloopz | Learn. Practice. Get Placed.",
+  description:
+    "Expert-led programs that prepare learners for high-growth careers.",
 };
 
 export default async function RootLayout({
@@ -34,7 +35,9 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <script
           dangerouslySetInnerHTML={{
             __html: `

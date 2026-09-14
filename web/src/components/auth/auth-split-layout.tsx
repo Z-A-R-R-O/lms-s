@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Sparkles } from "lucide-react";
+import { SkilloopzLogo } from "@/components/branding/skilloop-logo";
 
 interface AuthSplitLayoutProps {
   children: React.ReactNode;
@@ -32,11 +33,8 @@ export function AuthSplitLayout({ children, title, subtitle }: AuthSplitLayoutPr
         </div>
 
         <div className="relative z-10 flex flex-col items-center gap-10 text-center max-w-lg">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-[10px] bg-primary-500 shadow-glow">
-              <span className="text-sm font-bold text-white">N</span>
-            </div>
-            <span className="text-2xl font-bold tracking-tight text-foreground">NEOT</span>
+          <Link href="/">
+            <SkilloopzLogo />
           </Link>
 
           <motion.div
@@ -48,7 +46,7 @@ export function AuthSplitLayout({ children, title, subtitle }: AuthSplitLayoutPr
             <p className="text-lg leading-relaxed text-foreground/90">
               &ldquo;Learning should adapt to humans. Humans should not adapt to systems.&rdquo;
             </p>
-            <p className="mt-6 text-sm text-muted-foreground">— The NEOT Philosophy</p>
+            <p className="mt-6 text-sm text-muted-foreground">— The skilloopz philosophy</p>
           </motion.div>
 
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -71,11 +69,8 @@ export function AuthSplitLayout({ children, title, subtitle }: AuthSplitLayoutPr
           className="relative z-10 w-full max-w-md"
         >
           <div className="mb-6 lg:hidden">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-[8px] bg-primary-500 shadow-glow-sm">
-                <span className="text-xs font-bold text-white">N</span>
-              </div>
-              <span className="text-lg font-bold tracking-tight text-foreground">NEOT</span>
+            <Link href="/">
+              <SkilloopzLogo compact />
             </Link>
           </div>
 

@@ -7,7 +7,10 @@ export async function generateMetadata(): Promise<Metadata> {
   const global = await getGlobalSeoSettings();
   return buildPageMetadata(
     undefined,
-    { title: "About", description: "Learn about NEOT — the adaptive learning platform" },
+    {
+      title: "About",
+      description: "Learn about skilloopz — the practical learning platform",
+    },
     global,
   );
 }

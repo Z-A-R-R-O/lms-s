@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { RoleSelector } from "@/components/auth/role-selector";
+import { SkilloopzLogo } from "@/components/branding/skilloop-logo";
 
 type Role = "student" | "teacher" | "parent";
 
@@ -169,12 +170,7 @@ export function OnboardingFlow() {
         </div>
 
         <div className="relative z-10 flex flex-col items-center gap-8 text-center max-w-lg">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-[10px] bg-primary-500 shadow-glow">
-              <span className="text-sm font-bold text-white">N</span>
-            </div>
-            <span className="text-2xl font-bold tracking-tight text-foreground">NEOT</span>
-          </div>
+          <SkilloopzLogo />
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -208,11 +204,8 @@ export function OnboardingFlow() {
         >
           {/* Mobile Logo */}
           <div className="mb-8 lg:hidden">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-[8px] bg-primary-500 shadow-glow-sm">
-                <span className="text-xs font-bold text-white">N</span>
-              </div>
-              <span className="text-lg font-bold tracking-tight text-foreground">NEOT</span>
+            <Link href="/">
+              <SkilloopzLogo compact />
             </Link>
           </div>
 
@@ -264,7 +257,7 @@ export function OnboardingFlow() {
                 <div className="space-y-6">
                   <div>
                     <h1 className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-                      Welcome to NEOT
+                      Welcome to skilloopz
                     </h1>
                     <p className="mt-2 text-muted-foreground">
                       What best describes you? Choose your role to personalize your experience.

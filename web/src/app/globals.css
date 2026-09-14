@@ -469,7 +469,6 @@
     font-size: 2rem;
   }
 
-  #programs > div > div:last-child,
   #why-abhi > div > div:last-child,
   #pathway > div > div:last-child {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -480,26 +479,12 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
-  #programs article {
-    min-height: 12.25rem;
-    padding: 0.9rem;
+  #programs .program-showcase-frame {
+    height: 22rem;
   }
 
-  #programs article h3 {
-    margin-top: 0.75rem;
-    font-size: 1rem;
-    line-height: 1.05;
-  }
-
-  #programs article p {
-    display: none;
-  }
-
-  #programs article a > span:first-child {
-    display: none;
-  }
-  #programs article a {
-    justify-content: flex-end;
+  #programs .program-showcase-card h3 {
+    font-size: 1.9rem;
   }
 
   #why-abhi article,

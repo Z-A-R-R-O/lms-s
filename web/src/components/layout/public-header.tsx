@@ -5,6 +5,7 @@ import { Menu, X, ArrowUpRight, UserRound } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
+import { SkilloopzLogo } from "@/components/branding/skilloop-logo";
 
 const navLinks = [
   { label: "Programs", href: "/#programs" },
@@ -31,14 +32,18 @@ export function PublicHeader() {
 
   useEffect(() => {
     const onPortalState = (event: Event) => {
-      const { progress, locked } = (event as CustomEvent<{ progress: number; locked: boolean }>).detail;
+      const { progress, locked } = (
+        event as CustomEvent<{ progress: number; locked: boolean }>
+      ).detail;
       setPortalProgress(progress);
       setPortalLocked(locked);
       if (locked && progress > 0.015) setMobileOpen(false);
     };
     window.addEventListener("abhi-portal-state", onPortalState);
     const stateFrame = window.requestAnimationFrame(() => {
-      const storedProgress = Number(document.documentElement.dataset.abhiPortalProgress);
+      const storedProgress = Number(
+        document.documentElement.dataset.abhiPortalProgress,
+      );
       const storedLock = document.documentElement.dataset.abhiPortalLocked;
       if (Number.isFinite(storedProgress)) setPortalProgress(storedProgress);
       if (storedLock) setPortalLocked(storedLock === "true");
@@ -59,13 +64,13 @@ export function PublicHeader() {
     >
       <motion.nav
         initial={false}
-        animate={{ 
+        animate={{
           scale: scrolled ? 0.95 : 1,
           width: scrolled ? "92%" : "100%",
         }}
-        transition={{ 
-          duration: 0.4, 
-          ease: [0.16, 1, 0.3, 1] 
+        transition={{
+          duration: 0.4,
+          ease: [0.16, 1, 0.3, 1],
         }}
         className={`relative flex max-w-[1400px] items-center justify-between overflow-hidden rounded-2xl border px-3 shadow-[0_18px_55px_rgba(0,0,0,.18)] backdrop-blur-2xl transition-all duration-700 sm:px-5 ${
           scrolled
@@ -74,11 +79,8 @@ export function PublicHeader() {
         }`}
       >
         <span className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/35 to-transparent" />
-        <Link href="/" className="flex items-center gap-2 px-1.5 sm:gap-3 sm:px-2">
-          <div className="relative grid h-8 w-8 place-items-center overflow-hidden rounded-[11px] border border-fuchsia-200/55 bg-[radial-gradient(circle_at_50%_40%,rgba(255,230,253,.28),rgba(177,72,255,.12)_30%,transparent_62%)] shadow-[0_0_28px_rgba(192,109,255,.24)] sm:h-10 sm:w-10 sm:rounded-[14px]">
-            <svg viewBox="0 0 48 48" className="h-6 w-6 sm:h-8 sm:w-8" aria-hidden="true"><defs><linearGradient id="portal-stroke" x1="8" x2="40" y1="8" y2="40"><stop stopColor="#f4b8ff" /><stop offset=".52" stopColor="#bb6cff" /><stop offset="1" stopColor="#7e78ff" /></linearGradient></defs><circle cx="24" cy="24" r="15" fill="none" stroke="url(#portal-stroke)" strokeWidth="1.35" /><circle cx="24" cy="24" r="9" fill="none" stroke="url(#portal-stroke)" strokeDasharray="18 7" strokeWidth="1.2" /><path d="M24 16v16M16 24h16" stroke="url(#portal-stroke)" strokeWidth="1" opacity=".75" /><circle cx="24" cy="24" r="2.2" fill="#fff" /></svg>
-          </div>
-          <span className="flex items-baseline gap-1 text-white sm:gap-1.5"><span className="font-serif text-[1.05rem] leading-none tracking-[.06em] sm:text-[1.45rem]">ABHI</span><span className="text-[.48rem] font-semibold tracking-[.18em] text-fuchsia-100/80 sm:text-[.58rem] sm:tracking-[.22em]">LMS</span></span>
+        <Link href="/" className="px-1.5 sm:px-2">
+          <SkilloopzLogo compact />
         </Link>
 
         <div className="hidden items-center gap-1 xl:flex">
@@ -102,7 +104,11 @@ export function PublicHeader() {
             onClick={() => setMobileOpen(!mobileOpen)}
             className="relative z-50 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/75 sm:h-10 sm:w-10"
           >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {mobileOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
           </button>
         </div>
       </motion.nav>
@@ -158,23 +164,35 @@ function AccountAction({
     : "group relative inline-flex items-center gap-3 overflow-hidden rounded-xl border border-white/15 bg-gradient-to-r from-fuchsia-600 via-violet-600 to-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_28px_rgba(117,60,255,.28)] transition-all hover:scale-[1.02] active:scale-[0.98]";
 
   if (isLoading) {
-    return <span className="h-10 w-28 animate-pulse rounded-xl bg-white/10" aria-label="Loading account" />;
+    return (
+      <span
+        className="h-10 w-28 animate-pulse rounded-xl bg-white/10"
+        aria-label="Loading account"
+      />
+    );
   }
 
   if (!user) {
     return (
       <Link href="/apply" onClick={onClick} className={className}>
-        {!mobile && <span className="absolute inset-x-0 top-0 h-px bg-white/50" />}
+        {!mobile && (
+          <span className="absolute inset-x-0 top-0 h-px bg-white/50" />
+        )}
         <span className="relative z-10">Apply Now</span>
-        <ArrowUpRight className="relative z-10 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        <ArrowUpRight className="relative z-10 h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
       </Link>
     );
   }
 
-  const firstName = user.fullName?.trim().split(" ")[0] || user.email?.split("@")[0] || "Learner";
+  const firstName =
+    user.fullName?.trim().split(" ")[0] ||
+    user.email?.split("@")[0] ||
+    "Learner";
   return (
     <Link href="/dashboard" onClick={onClick} className={className}>
-      <span className="grid h-5 w-5 place-items-center rounded-full bg-white/20"><UserRound className="h-3 w-3" /></span>
+      <span className="grid h-5 w-5 place-items-center rounded-full bg-white/20">
+        <UserRound className="h-3 w-3" />
+      </span>
       <span>Continue, {firstName}</span>
       <ArrowUpRight className="h-3.5 w-3.5" />
     </Link>
